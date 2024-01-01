@@ -27,15 +27,19 @@ else
     echo "Le dossier '$dossier_images' a été créé avec succès."
 fi
 
-
-
 source d1.sh
+source l.sh
+source t.sh
 
-# Vérification si le deuxième argument est -d1 et appel de la fonction option1
-if [ "$2" = "-d1" ]; then
-    option1 "$1"
+# Vérification des options et appel des fonctions correspondantes
+if   [ "$2" = "-d1" ]; then
+    traitementD1 "$1"
+elif [ "$2" = "-l" ]; then
+    traitementL "$1"
+elif [ "$2" = "-t" ]; then
+    traitementT "$1"
+else
+    echo "Option non valide."
+    exit 1
 fi
 
-# Si l'option n'est pas valide
-echo "Option non valide"
-exit 1
