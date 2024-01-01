@@ -1,6 +1,20 @@
-#!/bin/bash
+generate_histogram() {
+   gnuplot << EOF
+    set terminal pngcairo enhanced font 'Arial,10'
+    set output 'images/histogramme_conducteurs.png'
 
-option1() {
+    set xlabel 'Conducteurs'
+    set ylabel 'Nombre de trajets'
+    
+    set style data histograms
+    set style fill solid border -1
+    set boxwidth 0.5
+
+    plot 'temp/cache_conducteurs.txt' using 1:xtic(2) with histogram title ''
+EOF
+}
+
+traitementD1() {
     # Récupération du nom du fichier CSV
     input_file="$1"
     
@@ -21,6 +35,6 @@ option1() {
     end_time=$(date +%s.%N)
     execution_time=$(echo "$end_time - $start_time" | bc)
     echo "Temps d'exécution : $execution_time secondes"
-    
+    generate_histogram
     exit 0
 }
