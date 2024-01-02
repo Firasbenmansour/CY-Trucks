@@ -5,8 +5,8 @@ generate_histogram() {
     set terminal pngcairo enhanced font 'Arial,10'
     set output 'images/histogramme_conducteurs.png'
 
-    set xlabel 'Nombre de trajets'
-    set ylabel 'Conducteurs'
+    set ylabel 'Nombre de trajets'
+    set xlabel 'Conducteurs'
 
     # Setting up horizontal bars
     set style data boxes
