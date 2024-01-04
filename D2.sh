@@ -3,6 +3,8 @@
 # Chemin vers le fichier CSV sur votre machine Windows
 csv_file="/home/sofack/Téléchargements/data.csv"
 
+  traitementD2(){
+
 # Vérification de la présence du fichier CSV
 if [ ! -f "$csv_file" ]; then
     echo "Le fichier CSV n'existe pas."
@@ -24,7 +26,7 @@ awk -F ';' '/^[0-9]+/{conducteur=$6; distance[conducteur]+=$5} END{for (c in dis
     execution_time=$(echo "$end_time - $start_time" | bc)
     echo "Temps d'exécution : $execution_time secondes"
     exit 0
-
+}
 # Création du graphique avec GNUplot
 gnuplot -persist <<EOF
 set term png
