@@ -27,8 +27,11 @@ end_time=$(date +%s)
 execution_time=$((end_time - start_time))
 
 echo "Temps d'exécution total : $execution_time secondes"
+generate_histogram
+
     exit 0
 }
+generate_histogram(){
 # Création du graphique avec GNUplot
 gnuplot -persist <<EOF
 set term png
@@ -45,5 +48,5 @@ EOF
 
 echo "Traitement terminé. Le graphique a été enregistré sous le nom 'histogramme_distances_conducteurs.png'."
 mv histogramme_distance_conducteurs.png home/Téléchargements/temp
-
+}
  
