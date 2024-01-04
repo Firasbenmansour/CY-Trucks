@@ -5,7 +5,7 @@ generate_histogram() {
     set terminal pngcairo enhanced font 'Arial,10'
     set output 'images/histogramme_distances_conducteurs.png'
 
-    set xlabel 'Nombre de trajets'
+    set xlabel 'distances'
     set ylabel 'Conducteurs'
 
     # Setting up horizontal bars
