@@ -10,10 +10,10 @@ if [ ! -f "$csv_file" ]; then
 fi
 
 # Extraction des noms des conducteurs et de leurs distances totales
-awk -F ';' '/^[0-9]+/{conducteur=$2" "$3; distance[conducteur]+=$5} END{for (c in distance) print c, distance[c]}' "$csv_file" \
-    | sort -k2 -n -r \
-    | head -n 10 \
-    > distances_conducteurs.txt
+awk -F ';' '/^[0-9]+/{conducteur=$6; distance[conducteur]+=$5} END{for (c in distance) print c, distance[c]}' $csv_file \
+    | sort -k5 -n -r \
+    | head -n 10 > distances_conducteurs.txt
+
     echo "$distances_conducteurs.txt" | awk '{print $2, $3, $1}' > "$/home/Téléchargements/temp/distances_conducteurs.txt"
 
     # Si le fichier existe, affichage de son contenu
