@@ -30,7 +30,7 @@ fi
 source d1.sh
 source l.sh
 source t.sh
-
+source d2.sh
 # Vérification des options et appel des fonctions correspondantes
 if   [ "$2" = "-d1" ]; then
     traitementD1 "$1"
@@ -38,8 +38,9 @@ elif [ "$2" = "-l" ]; then
     traitementL "$1"
 elif [ "$2" = "-t" ]; then
     traitementT "$1"
+elif [ "$2" = "-d2" ]; then
+    traitementD2 "$1"
 else
     echo "Option non valide."
     exit 1
 fi
-
