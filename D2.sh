@@ -2,9 +2,11 @@
 
 # Chemin vers le fichier CSV sur votre machine Windows
 csv_file="/home/sofack/Téléchargements/data.csv"
+# Mesures de temps
+start_time=$(date +%s)
+
 
   traitementD2(){
-
 # Vérification de la présence du fichier CSV
 if [ ! -f "$csv_file" ]; then
     echo "Le fichier CSV n'existe pas."
@@ -21,10 +23,7 @@ awk -F ';' '/^[0-9]+/{conducteur=$6; distance[conducteur]+=$5} END{for (c in dis
     # Si le fichier existe, affichage de son contenu
     cat "$/home/Téléchargements/temp/distances_conducteurs.txt"
     
-    # Calcul du temps d'exécution
-    end_time=$(date +%s.%N)
-    execution_time=$(echo "$end_time - $start_time" | bc)
-    echo "Temps d'exécution : $execution_time secondes"
+   
     exit 0
 }
 # Création du graphique avec GNUplot
@@ -43,3 +42,9 @@ EOF
 
 echo "Traitement terminé. Le graphique a été enregistré sous le nom 'histogramme_distances_conducteurs.png'."
 mv histogramme_distance_conducteurs.png home/Téléchargements/temp
+
+ # Calcul du temps d'exécution
+end_time=$(date +%s)
+execution_time=$((end_time - start_time))
+
+echo "Temps d'exécution total : $execution_time secondes"
