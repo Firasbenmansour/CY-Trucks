@@ -21,9 +21,12 @@ awk -F ';' '/^[0-9]+/{conducteur=$6; distance[conducteur]+=$5} END{for (c in dis
     echo "$distances_conducteurs.txt" | awk '{print $2, $3, $1}' > "$/home/Téléchargements/temp/distances_conducteurs.txt"
 
     # Si le fichier existe, affichage de son contenu
-    cat "$/home/Téléchargements/temp/distances_conducteurs.txt"
-    
-   
+    cat "$/home/Téléchargements/temp/distances_conducteurs.txt"  
+   # Calcul du temps d'exécution
+end_time=$(date +%s)
+execution_time=$((end_time - start_time))
+
+echo "Temps d'exécution total : $execution_time secondes"
     exit 0
 }
 # Création du graphique avec GNUplot
@@ -43,8 +46,4 @@ EOF
 echo "Traitement terminé. Le graphique a été enregistré sous le nom 'histogramme_distances_conducteurs.png'."
 mv histogramme_distance_conducteurs.png home/Téléchargements/temp
 
- # Calcul du temps d'exécution
-end_time=$(date +%s)
-execution_time=$((end_time - start_time))
-
-echo "Temps d'exécution total : $execution_time secondes"
+ 
