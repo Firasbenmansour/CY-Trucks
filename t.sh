@@ -25,5 +25,6 @@ traitementT() {
         }
     }' "$input_file" > "$dossier_temp/donnees_preparees.txt"
     # (sort donnees_preparees.txt | uniq -d) pour verifier que y'a pas des doublants
-
+    # appel au programe c pour faire le trie
+    # prendre les 10 premiers 
 }
