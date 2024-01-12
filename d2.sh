@@ -1,11 +1,10 @@
 #!/bin/bash
-
 generate_histogram() {
    gnuplot << EOF
     set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_distances_conducteurs.png'
+    set output 'images/histogramme_d2.png'
 
-    set xlabel 'distances'
+    set xlabel 'trajets'
     set ylabel 'Conducteurs'
 
     # Setting up horizontal bars
@@ -20,7 +19,7 @@ generate_histogram() {
     set xtics rotate
 
     # Use 'using' to specify the axis: 2 for x-values (number of deliveries) and 1 for y-tics (driver names)
-    plot 'temp/distances_conducteurs.txt' using 3:xticlabels(1) with boxes notitle
+    plot 'temp/donnees_traitement_d2.txt' using 3:xticlabels(1) with boxes notitle
 EOF
 }
 
@@ -32,7 +31,7 @@ traitementD2() {
     start_time=$(date +%s.%N)
 
     # Vérification de l'existence du fichier CSV
-    cache_file="temp/distances_conducteurs.txt"
+    cache_file="temp/donnees_traitement_d2.txt"
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms des conducteurs et de leurs distances totales
         awk -F';' 'NR>1{distance[$6]+=$5} END{for (driver in distance) print distance[driver], driver}' "$input_file"| sort -k1 -nr| head -n 10 | awk '{print $2, $3, $1}'> "$cache_file"
@@ -47,6 +46,6 @@ traitementD2() {
     echo "Temps d'exécution : $execution_time secondes"
     
     generate_histogram
-    echo "Traitement terminé. Le graphique a été enregistré sous le nom 'histogramme_distances_conducteurs.png'."
+    
     exit 0
 }
