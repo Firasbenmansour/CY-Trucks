@@ -3,10 +3,10 @@
 generate_histogram() {
    gnuplot << EOF
     set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_conducteurs.png'
+    set output 'images/histogramme_d1.png'
 
-    set ylabel 'Nombre de trajets'
-    set xlabel 'Conducteurs'
+    set xlabel 'Nombre de trajets'
+    set ylabel 'Conducteurs'
 
     # Setting up horizontal bars
     set style data boxes
@@ -20,7 +20,7 @@ generate_histogram() {
     set xtics rotate
 
     # Use 'using' to specify the axis: 2 for x-values (number of deliveries) and 1 for y-tics (driver names)
-    plot 'temp/cache_conducteurs.txt' using 3:xticlabels(1) with boxes notitle
+    plot 'temp/donnees_traitement_d1.txt' using 3:xticlabels(1) with boxes notitle
 EOF
 }
 
@@ -35,11 +35,11 @@ traitementD1() {
     start_time=$(date +%s.%N)
     
     # Vérification si le fichier de cache existe
-    cache_file="temp/cache_conducteurs.txt"
+    cache_file="temp/donnees_traitement_d1.txt"
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms de conducteurs et comptage des trajets uniques
-        conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6]++} END {for (cond in conducteurs) print conducteurs[cond], cond}' "$input_file" | sort -nr | head -n 10)
-        echo "$conducteurs_trajets" | awk '{print $2, $3, $1}' > "$cache_file"
+        conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6]++} END {for (cond in conducteurs) print cond, conducteurs[cond]}' "$input_file" | sort -nr | head -n 10)
+        echo "$conducteurs_trajets" > "$cache_file"
     fi
     # Si le fichier existe, affichage de son contenu
     cat "$cache_file"
@@ -51,3 +51,4 @@ traitementD1() {
     generate_histogram
     exit 0
 }
+
