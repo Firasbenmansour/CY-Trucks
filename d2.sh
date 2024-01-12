@@ -5,7 +5,7 @@ generate_histogram() {
     set output 'images/histogramme_d2.png'
 
     set xlabel 'trajets'
-    set ylabel 'Conducteurs'
+    set ylabel 'distance'
 
     # Setting up horizontal bars
     set style data boxes
