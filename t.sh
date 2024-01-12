@@ -4,7 +4,7 @@
 traitementT() {
     input_file="data.csv"
     dossier_temp="temp"  # Nom du dossier temporaire existant
-    
+    dossier_fichiers_c="fichiers_c"
     # Mesure du temps d'exécution
     start_time=$(date +%s.%N)
     # Vérification de l'existence du fichier CSV
@@ -29,13 +29,13 @@ traitementT() {
     }' "$input_file" > "$dossier_temp/donnees_traitement_t.txt"
     # (sort donnees_preparees.txt | uniq -d) pour verifier que y'a pas des doublants
     # Calcul du temps d'exécution
-    gcc fichiers_c/t_avl_nbTrajets.c fichiers_c/ville.c -o fichiers_c/t_AVL_nbTrajets 
-    ./fichiers_c/t_AVL_nbTrajets > "$dossier_temp/villes_triees_nbTrajets.txt"
+    gcc "$dossier_fichiers_c/t_avl_nbTrajets.c" "$dossier_fichiers_c/ville.c" -o "$dossier_fichiers_c/t_AVL_nbTrajets" 
+    ./"$dossier_fichiers_c/t_AVL_nbTrajets" > "$dossier_temp/villes_triees_nbTrajets.txt"
     
-    head -n 10 temp/villes_triees_nbTrajets.txt >"$dossier_temp/Top10_villes.txt"
+    head -n 10 "$dossier_temp/villes_triees_nbTrajets.txt" >"$dossier_temp/Top10_villes.txt"
     
-    gcc fichiers_c/t_avl_ordreAlpha.c fichiers_c/ville.c -o fichiers_c/t_AVL_ordreAlpha
-    ./fichiers_c/t_AVL_ordreAlpha > "$dossier_temp/villes_triees_ordreAlpha.txt"
+    gcc "$dossier_fichiers_c/t_avl_ordreAlpha.c" "$dossier_fichiers_c/ville.c" -o "$dossier_fichiers_c/t_AVL_ordreAlpha"
+    ./"$dossier_fichiers_c/t_AVL_ordreAlpha" > "$dossier_temp/villes_triees_ordreAlpha.txt"
     end_time=$(date +%s.%N)
     execution_time=$(echo "$end_time - $start_time" | bc)
     echo "Temps d'exécution : $execution_time secondes"
