@@ -1,5 +1,5 @@
 #!/bin/bash
-generate_histogram() {
+generate_histogram_d2() {
    gnuplot << EOF
     set terminal pngcairo enhanced font 'Arial,10'
     set output 'images/histogramme_d2.png'
@@ -45,7 +45,7 @@ traitementD2() {
     execution_time=$(echo "$end_time - $start_time" | bc)
     echo "Temps d'exécution : $execution_time secondes"
     
-    generate_histogram
+    generate_histogram_d2
     
     exit 0
 }
