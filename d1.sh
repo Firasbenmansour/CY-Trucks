@@ -38,8 +38,8 @@ traitementD1() {
     cache_file="temp/donnees_traitement_d1.txt"
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms de conducteurs et comptage des trajets uniques
-        conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6]++} END {for (cond in conducteurs) print cond, conducteurs[cond]}' "$input_file" | sort -nr | head -n 10)
-        echo "$conducteurs_trajets" > "$cache_file"
+        conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6]++} END {for (cond in conducteurs) print conducteurs[cond], cond}' "$input_file" | sort -nr | head -n 10)
+        echo "$conducteurs_trajets" | awk '{print $2, $3, $1}' > "$cache_file"
     fi
     # Si le fichier existe, affichage de son contenu
     cat "$cache_file"
