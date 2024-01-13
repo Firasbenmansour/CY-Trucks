@@ -1,9 +1,9 @@
 #!/bin/bash
 
-generate_histogram() {
+generate_histogram_l() {
    gnuplot << EOF
     set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_l1.png'
+    set output 'images/histogramme_l.png'
 
     set xlabel 'l’identifiant du trajet'
     set ylabel ' la distance '
@@ -38,7 +38,7 @@ traitementL() {
             awk -F';' '{sum[$1]+=$5} END {for(i in sum) print i " ; " sum[i]}' "$input_file" | sort -t';' -k2,2nr -k5,5nr | head -10 > "$cache_file"
             
             cat "$cache_file"
-            generate_histogram
+            generate_histogram_l
             # Calcul du temps d'exécution
             end_time=$(date +%s.%N)
             execution_time=$(echo "$end_time - $start_time" | bc)
