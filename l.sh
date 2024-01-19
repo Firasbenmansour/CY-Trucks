@@ -1,26 +1,19 @@
 #!/bin/bash
 
 generate_histogram_l() {
-   gnuplot << EOF
-    set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_l.png'
-
-    set xlabel 'l’identifiant du trajet'
-    set ylabel ' la distance '
-
-    # Setting up horizontal bars
-    set style data boxes
-    set style fill solid border -1
-    set boxwidth 0.5
-
-    # Rotate driver names for better readability and adjust range if necessary
-    set ytics nomirror rotate by -45
-
-    # Set xtics to auto-rotate if there are many labels, and adjust range if necessary
-    set xtics rotate
-
-    # Use 'using' to specify the axis: 2 for x-values (number of deliveries) and 1 for y-tics (driver names)
-    plot 'temp/donnees_traitement_l.txt' using 3:xticlabels(1) with boxes notitle
+gnuplot <<EOF
+reset
+set term pngcairo size 800,600 enhanced font 'arial,10'
+set title 'Les 10 trajets les plus longs' font '0,15'
+set xlabel "Identifiants Trajets" font '0,12'
+set ylabel "Distance (km)" font '0,12'
+set datafile separator ";"
+set style data histograms
+set style fill solid border -1
+set boxwidth 1.5 relative
+set xtic rotate by 0 font '0,11'
+set output 'images/histogramme_l.png'
+plot 'temp/donnees_traitement_l.txt' using 2:xtic(1) lc rgb "red" notitle
 EOF
 }
 
@@ -53,3 +46,4 @@ traitementL() {
     
     exit 0
 }
+
