@@ -1,28 +1,27 @@
 #!/bin/bash
 
 generate_histogram_d1() {
-   gnuplot << EOF
-    set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_d1.png'
 
-    set xlabel 'Nombre de trajets'
-    set ylabel 'Conducteurs'
-
-    # Setting up horizontal bars
-    set style data boxes
-    set style fill solid border -1
-    set boxwidth 0.5
-
-    
-    set ytics nomirror rotate by -45
-
-
-    set xtics rotate
-
-
-    plot 'temp/donnees_traitement_d1.txt' using 3:xticlabels(1) with boxes notitle
+gnuplot <<EOF
+reset
+set size 1,1
+set term pngcairo size 600,800 enhanced font 'arial,10'
+set grid y
+set datafile separator ";"
+set style fill solid border -1
+set boxwidth 1.5 relative
+set xlabel "Conducteurs" rotate by 180 font '0,12' offset 0,-9 
+set y2label "Distance (km)" font '0,12' offset 3,0
+set ylabel "Conducteurs avec le plus de trajets" font '0,15' offset 4,0
+set xtic rotate by 90 font '0,10' offset 0.5,-9.5
+set ytic rotate by 90 font '0,11' offset 74,1
+set style data histograms
+set output 'images/histogramme_d1.png'
+plot 'temp/donnees_traitement_d1.txt' using 2:xticlabels(1) notitle lc rgb "green"
 EOF
-}
+convert images/histogramme_d1.png -rotate 90 images/histogramme_d1.png
+} 
+
 
 
 
@@ -39,7 +38,7 @@ traitementD1() {
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms de conducteurs et comptage des trajets uniques
         conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6" "$2]++} END {for (cond in conducteurs) print conducteurs[cond], cond}' "$input_file" | sort -nr | head -n 10)
-        echo "$conducteurs_trajets" | awk '{print $2, $3, $1}' > "$cache_file"
+        echo "$conducteurs_trajets" | awk '{print $2, $3";", $1}'> "$cache_file"
     fi
     # Si le fichier existe, affichage de son contenu
     cat "$cache_file"
