@@ -28,8 +28,12 @@ traitementL() {
 
         # Vérification que le fichier est un fichier CSV
         if [[ "$input_file" == *.csv ]]; then
-                awk -F';' 'NR>1{sum[$1]+=$5} END {for(route in sum) print route";"sum[route]}' "$input_file" | sort -t';' -k2,2nr -k5,5nr | head -10 > "$cache_file"
-            
+                LC_NUMERIC="C" awk -F';' 'NR>1{sum[$1]+=$5} 
+        END {
+        for(route in sum) {
+            printf "%.3f %s\n", sum[route], route;
+        }
+        }' "$input_file" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | sort -k2 -nr | awk '{printf "%s;%s\n", $2, $1}' > "$cache_file"
             cat "$cache_file"
             generate_histogram_l
             # Calcul du temps d'exécution
@@ -46,4 +50,4 @@ traitementL() {
     
     exit 0
 }
-
+#verivier les allocations
