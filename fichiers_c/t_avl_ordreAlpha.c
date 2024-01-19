@@ -26,7 +26,7 @@ int main() {
 
     fclose(fichier);
 
-    trierVilles(racine);
+    trierVillesAlpha(racine);
 
     return 0;
 }
