@@ -1,31 +1,30 @@
 #!/bin/bash
 generate_histogram_d2() {
-   gnuplot << EOF
-    set terminal pngcairo enhanced font 'Arial,10'
-    set output 'images/histogramme_d2.png'
-
-    set xlabel 'trajets'
-    set ylabel 'distance'
-
-    # Setting up horizontal bars
-    set style data boxes
-    set style fill solid border -1
-    set boxwidth 0.5
-
-    # Rotate driver names for better readability and adjust range if necessary
-    set ytics nomirror rotate by -45
-
-    # Set xtics to auto-rotate if there are many labels, and adjust range if necessary
-    set xtics rotate
-
-    # Use 'using' to specify the axis: 2 for x-values (number of deliveries) and 1 for y-tics (driver names)
-    plot 'temp/donnees_traitement_d2.txt' using 3:xticlabels(1) with boxes notitle
+gnuplot <<EOF
+reset
+set size 1,1
+set term pngcairo size 600,800 enhanced font 'arial,10'
+set grid y
+set datafile separator ";"
+set style fill solid border -1
+set boxwidth 1.5 relative
+set locale 'fr_FR.UTF-8'  # Set the locale to one that uses a comma as a decimal separator
+set format y "%.2f" 
+set xlabel "Conducteurs" rotate by 180 font '0,12' offset 0,-9 
+set y2label "Distance (km)" font '0,12' offset 3,0
+set ylabel "Conducteurs et la plus grande distance" font '0,15' offset 4,0
+set xtic rotate by 90 font '0,10' offset 0.5,-9.5
+set ytic rotate by 90 font '0,11' offset 74,1
+set style data histograms
+set output 'images/histogramme_d2.png'
+plot 'temp/donnees_traitement_d2.txt' using 2:xticlabels(1) notitle lc rgb "blue"
 EOF
+convert images/histogramme_d2.png -rotate 90 images/histogramme_d2.png
 }
 
 
-traitementD2() {
 
+traitementD2() {
     input_file="data.csv"
     # Mesure du temps d'exécution
     start_time=$(date +%s.%N)
@@ -34,18 +33,20 @@ traitementD2() {
     cache_file="temp/donnees_traitement_d2.txt"
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms des conducteurs et de leurs distances totales
-        awk -F';' 'NR>1{distance[$6]+=$5} END{for (driver in distance) print distance[driver], driver}' "$input_file"| sort -k1 -nr| head -n 10 | awk '{print $2, $3, $1}'> "$cache_file"
+        awk -F';' 'NR>1{distance[$6]+=$5} END{for (driver in distance) printf("%.f %s\n", distance[driver], driver)}' "$input_file" | sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$cache_file"
     fi
-    
+
     # Si le fichier existe, affichage de son contenu
     cat "$cache_file"
-    
+
     # Calcul du temps d'exécution
     end_time=$(date +%s.%N)
     execution_time=$(echo "$end_time - $start_time" | bc)
     echo "Temps d'exécution : $execution_time secondes"
-    
+
     generate_histogram_d2
-    
+
     exit 0
 }
+
+
