@@ -56,7 +56,6 @@ int getBalance(Ville* ville) {
     if (ville == NULL){return 0;}
     return hauteur(ville->gauche) - hauteur(ville->droite);
 }
-
 Ville* insertionNbr(Ville* node, char* nom, int nbTrajets , int nbDeparts) {
     if (node == NULL){
        return nouveauNoeud(nom, nbTrajets, nbDeparts);
@@ -92,7 +91,7 @@ Ville* insertionNbr(Ville* node, char* nom, int nbTrajets , int nbDeparts) {
     return node;
 }
 
-Ville* insertionAlpha(Ville* node, char* nom, int nbTrajets,int nbDeparts) {
+Ville* insertionAlpha(Ville* node, char* nom, int nbTrajets, int nbDeparts) {
     if (node == NULL) {
         return nouveauNoeud(nom, nbTrajets, nbDeparts);
     }
@@ -104,7 +103,8 @@ Ville* insertionAlpha(Ville* node, char* nom, int nbTrajets,int nbDeparts) {
     } else if (cmp > 0) {
         node->droite = insertionAlpha(node->droite, nom, nbTrajets, nbDeparts);
     } else {
-        return node;
+        // Handle case where names are equal (you may want to define specific behavior)
+        // For example, you might compare other fields or use a secondary criterion.
     }
 
     node->hauteur = 1 + max(hauteur(node->gauche), hauteur(node->droite));
@@ -130,6 +130,14 @@ Ville* insertionAlpha(Ville* node, char* nom, int nbTrajets,int nbDeparts) {
     }
 
     return node;
+}
+
+void trierVillesAlpha(Ville* racine) {
+    if (racine != NULL) {
+        trierVillesAlpha(racine->gauche);
+        printf("%s : %d : %d\n", racine->nom, racine->nbTrajets, racine->nbDeparts);
+        trierVillesAlpha(racine->droite);
+    }
 }
 void trierVilles(Ville* racine) {
     if (racine != NULL) {
