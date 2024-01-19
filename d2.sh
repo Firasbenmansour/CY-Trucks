@@ -9,7 +9,7 @@ set datafile separator ";"
 set style fill solid border -1
 set boxwidth 1.5 relative
 set locale 'fr_FR.UTF-8'  # Set the locale to one that uses a comma as a decimal separator
-set format y "%.2f" 
+set format y "%.f" 
 set xlabel "Conducteurs" rotate by 180 font '0,12' offset 0,-9 
 set y2label "Distance (km)" font '0,12' offset 3,0
 set ylabel "Conducteurs et la plus grande distance" font '0,15' offset 4,0
@@ -33,7 +33,13 @@ traitementD2() {
     cache_file="temp/donnees_traitement_d2.txt"
     if [ ! -f "$cache_file" ]; then
         # Extraction des noms des conducteurs et de leurs distances totales
-        awk -F';' 'NR>1{distance[$6]+=$5} END{for (driver in distance) printf("%.f %s\n", distance[driver], driver)}' "$input_file" | sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$cache_file"
+        LC_NUMERIC="C" awk -F';' 'NR>1{distance[$6] += $5} 
+    END {
+        for (driver in distance) {
+            printf "%.3f %s\n", distance[driver], driver;
+        }
+    }' "$input_file" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$cache_file"
+
     fi
 
     # Si le fichier existe, affichage de son contenu
