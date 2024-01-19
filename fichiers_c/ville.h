@@ -18,6 +18,6 @@ Ville* rotationGauche(Ville* x);
 int getBalance(Ville* ville);
 Ville* insertionNbr(Ville* node, char* nom, int nbTrajets , int nbDeparts);
 Ville* insertionAlpha(Ville* node, char* nom, int nbTrajets,int nbDeparts);
+void trierVillesAlpha(Ville* racine);
 void trierVilles(Ville* racine);
-
 #endif /* VILLE_H */
