@@ -1,12 +1,12 @@
 #!/bin/bash
-generate_histogram_d2() {
+generer_histogramme_d2() {
 gnuplot <<EOF
 reset
 set size 1,1
 set term pngcairo size 600,800 enhanced font 'arial,10'
 set grid y
 set datafile separator ";"
-set style fill solid border -1
+set style fill solid noborder
 set boxwidth 1.5 relative
 set locale 'fr_FR.UTF-8'  # Set the locale to one that uses a comma as a decimal separator
 set format y "%.f" 
@@ -25,34 +25,39 @@ convert images/histogramme_d2.png -rotate 90 images/histogramme_d2.png
 
 
 traitementD2() {
-    input_file="data.csv"
+    # Récupération du nom du fichier CSV
+    fichier_entree="data/data.csv"
+    
     # Mesure du temps d'exécution
-    start_time=$(date +%s.%N)
-
+    temps_debut=$(date +%s.%N)
+    
     # Vérification de l'existence du fichier CSV
-    cache_file="temp/donnees_traitement_d2.txt"
-    if [ ! -f "$cache_file" ]; then
+    if [ ! -f "$fichier_entree" ]; then
+        echo "Le fichier '$fichier_entree' n'existe pas."
+        exit 1
+    fi
+
+    # Vérification si le fichier de cache existe
+    fichier_cache="temp/donnees_traitement_d2.txt"
+    if [ ! -f "$fichier_cache" ]; then
         # Extraction des noms des conducteurs et de leurs distances totales
         LC_NUMERIC="C" awk -F';' 'NR>1{distance[$6] += $5} 
-    END {
-        for (driver in distance) {
-            printf "%.3f %s\n", distance[driver], driver;
-        }
-    }' "$input_file" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$cache_file"
-
+        END {
+            for (conducteur in distance) {
+                printf "%.3f %s\n", distance[conducteur], conducteur;
+            }
+        }' "$fichier_entree" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$fichier_cache"
     fi
 
     # Si le fichier existe, affichage de son contenu
-    cat "$cache_file"
+    cat "$fichier_cache"
 
     # Calcul du temps d'exécution
-    end_time=$(date +%s.%N)
-    execution_time=$(echo "$end_time - $start_time" | bc)
-    echo "Temps d'exécution : $execution_time secondes"
+    temps_fin=$(date +%s.%N)
+    temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
+    echo "Temps d'exécution : $temps_execution secondes"
 
-    generate_histogram_d2
+    generer_histogramme_d2
 
     exit 0
 }
-
-
