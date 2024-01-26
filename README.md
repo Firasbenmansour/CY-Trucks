@@ -4,11 +4,11 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 
 ### Traitements Disponibles
 
-. TRAITEMENT [D1] : conducteurs avec le plus de trajets.
-. TRAITEMENT [D2] : conducteurs et la plus grande distance.
-. TRAITEMENT [L] : les 10 trajets les plus longs.
-. TRAITEMENT [T] : les 10 villes les plus traversées.
-. Traitement [S] : statistiques sur les étapes.
+- TRAITEMENT [D1] : conducteurs avec le plus de trajets.
+- TRAITEMENT [D2] : conducteurs et la plus grande distance.
+- TRAITEMENT [L] : les 10 trajets les plus longs.
+- TRAITEMENT [T] : les 10 villes les plus traversées.
+- Traitement [S] : statistiques sur les étapes.
 
 #### UTULISATION
 
