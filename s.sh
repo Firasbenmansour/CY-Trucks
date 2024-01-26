@@ -1,7 +1,7 @@
 #!/bin/bash
 
-traitementT() {
-    input_file="data.csv"
+traitementS() {
+    input_file="data/data.csv"
     dossier_temp="temp"  # Nom du dossier temporaire existant
     dossier_fichiers_c="fichiers_c"
     
