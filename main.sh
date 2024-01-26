@@ -60,7 +60,19 @@ source t.sh
 source d2.sh
 source s.sh
 # Vérification des options et appel des fonctions correspondantes
-if   [ "$1" = "-d1" ]; then
+if [ "$1" = "-h" ]; then
+    # Afficher le message d'aide
+    echo "Option valide : $0 [-h | -d1 | -d2 | -l | -t | -s]"
+    echo "Utilité:"
+    echo "  -h      Afficher ce message d'aide"
+    echo "  -d1     Exécuter le traitement D1"
+    echo "  -d2     Exécuter le traitement D2"
+    echo "  -l      Exécuter le traitement L"
+    echo "  -t      Exécuter le traitement T"
+    echo "  -s      Exécuter le traitement S"
+    exit 0
+
+elif   [ "$1" = "-d1" ]; then
     traitementD1 
 elif [ "$1" = "-l" ]; then
     traitementL 
