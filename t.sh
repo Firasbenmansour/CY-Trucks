@@ -1,4 +1,5 @@
 #!/bin/bash
+
 generer_histogramme_t() {
 gnuplot <<EOF
 reset
@@ -80,4 +81,5 @@ traitementT() {
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
-}    # (sort donnees_preparees.txt | uniq -d) pour verifier que y'a pas des doublants
+    
+}    
