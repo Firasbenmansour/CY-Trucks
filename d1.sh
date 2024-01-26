@@ -1,7 +1,6 @@
 #!/bin/bash
 
 generer_histogramme_d1() {
-
 gnuplot <<EOF
 reset
 set size 1,1
@@ -23,9 +22,6 @@ convert images/histogramme_d1.png -rotate 90 images/histogramme_d1.png
 } 
 
 
-
-
-
 traitementD1() {
     # Récupération du nom du fichier CSV
     fichier_entree="data/data.csv"
@@ -39,20 +35,24 @@ traitementD1() {
         exit 1
     fi
     
-    # Vérification si le fichier de cache existe
     fichier_cache="temp/donnees_traitement_d1.txt"
-    if [ ! -f "$fichier_cache" ]; then
+    
         # Extraction des noms de conducteurs et comptage des trajets uniques
-        conducteurs_trajets=$(awk -F';' 'NR>1 {conducteurs[$6" "$2]++} END {for (cond in conducteurs) print conducteurs[cond], cond}' "$fichier_entree" | sort -nr | head -n 10)
-        echo "$conducteurs_trajets" | awk '{print $2, $3";", $1}'> "$fichier_cache"
-    fi
-    # Si le fichier existe, affichage de son contenu
-    cat "$fichier_cache"
+    awk -F';' '
+        NR>1{
+             conducteurs[$6" "$2]++
+            } 
+        END {
+        for (cond in conducteurs)
+            print conducteurs[cond], cond
+            }' "$fichier_entree" | sort -nr | head -n 10 | awk '{print $2, $3";", $1}' > "$fichier_cache"
+    
+     cat "$fichier_cache"
     
     # Calcul du temps d'exécution
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
     generer_histogramme_d1
-    exit 0
+    
 }
