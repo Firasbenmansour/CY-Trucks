@@ -32,35 +32,23 @@ traitementL() {
     
     # Vérification si le fichier de cache existe
     fichier_cache="temp/donnees_traitement_l.txt"
-    if [ -f "$fichier_entree" ]; then
-        echo "Le fichier existe"
-
-        # Vérification que le fichier est un fichier CSV
-        if [[ "$fichier_entree" == *.csv ]]; then
-            LC_NUMERIC="C" awk -F';' 'NR>1{sum[$1]+=$5} 
+    
+            LC_NUMERIC="C" awk -F';' '
+            NR>1{
+                 sum[$1]+=$5
+                } 
             END {
                 for(route in sum) {
                     printf "%.3f %s\n", sum[route], route;
                 }
             }' "$fichier_entree" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | sort -k2 -nr | awk '{printf "%s;%s\n", $2, $1}' > "$fichier_cache"
             
-            cat "$fichier_cache"
-            generer_histogramme_l
+    cat "$fichier_cache"
+    generer_histogramme_l
             
-            # Calcul du temps d'exécution
-            temps_fin=$(date +%s.%N)
-            temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
-            echo "Temps d'exécution : $temps_execution secondes"
-            
-            exit 0
-        else
-            exit 1
-        fi
-    else 
-        echo "Le fichier n'existe pas"
-    fi
-    
-    exit 0
-}
+    #Calcul du temps d'exécution
+    temps_fin=$(date +%s.%N)
+    temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
+    echo "Temps d'exécution : $temps_execution secondes"
 
-#verivier les allocations
+}
