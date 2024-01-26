@@ -2,7 +2,7 @@
 
 # Fichier de données
 fichier_data="data.csv"
-
+echo "-----------------------------------------------------------"
 # Vérifier si le fichier 'data.csv' existe dans le répertoire courant
 if [ -e "$fichier_data" ]; then
     echo "Le fichier '$fichier_data' existe dans le répertoire courant."
@@ -53,7 +53,7 @@ else
     mkdir "$dossier_images"
     echo "Le dossier '$dossier_images' a été créé avec succès."
 fi
-
+echo "-----------------------------------------------------------"
 source d1.sh
 source l.sh
 source t.sh
@@ -62,8 +62,7 @@ source s.sh
 
 if [ "$1" = "-h" ]; then
     # Afficher le message d'aide
-    echo "-----------------------------------------------------------"
-    echo "  Option valide : $0 [-h | -d1 | -d2 | -l | -t | -s]"
+    echo "  Options valides : $0 [-h | -d1 | -d2 | -l | -t | -s]"
     echo -e "\n  Utilité:"
     echo "  -h      Afficher ce message d'aide"
     echo "  -d1     Exécuter le traitement D1"
@@ -71,11 +70,10 @@ if [ "$1" = "-h" ]; then
     echo "  -l      Exécuter le traitement L"
     echo "  -t      Exécuter le traitement T"
     echo "  -s      Exécuter le traitement S"
-    echo "-----------------------------------------------------------"
     
 
 elif [ "$1" = "-d1" ]; then
-    traitementD1 
+    traitementD1
 elif [ "$1" = "-d2" ]; then
     traitementD2 
 elif [ "$1" = "-l" ]; then
@@ -85,6 +83,10 @@ elif [ "$1" = "-t" ]; then
 elif [ "$1" = "-s" ]; then
     traitementS 
 else
+    echo "---------------------------------------------------"
     echo "Option non valide. Tapez -h pour obtenir de l'aide."
+    echo "---------------------------------------------------"
     exit 1
 fi
+echo "-----------------------------------------------------------"
+exit 0
