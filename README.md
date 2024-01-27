@@ -13,9 +13,10 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 #### UTULISATION
 
 1. Enregistrez les fichiers dans un espace personnel.
-2. Ouvrez le Terminal.
-3. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
-4. Tapez ./main.sh -option
+2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
+3. Ouvrez le Terminal.
+4. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
+5. Tapez ./main.sh -option
 --> les option disponibles : 
            -d1    Exécuter le traitement D1 <br />
            -d2    Exécuter le traitement D2 <br />
