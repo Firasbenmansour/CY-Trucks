@@ -17,10 +17,10 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 3. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
 4. Tapez ./main.sh -option
 --> les option disponibles : 
-           -d1    Exécuter le traitement D1
-           -d2    Exécuter le traitement D2
-           -l     Exécuter le traitement L
-           -s     Exécuter le traitement S
-           -t     Exécuter le traitement T
+           -d1    Exécuter le traitement D1 <br />
+           -d2    Exécuter le traitement D2 <br />
+           -l     Exécuter le traitement L <br />
+           -s     Exécuter le traitement S <br />
+           -t     Exécuter le traitement T <br />
 
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
