@@ -9,11 +9,11 @@ set xlabel "Identifiants Trajets" font '0,12' offset 0,-2
 set title 'Statistiques sur les étapes' font '0,15'
 set tics out nomirror
 set output 'images/histogramme_s.png'
-plot "images/histogramme_s.png" using 2:xtic(3) with filledcurves above fillcolor rgb '#E6ADAD' title 'Distance moyenne' lt rgb '#E6ADAD', \
-     '' u 3:xtic(1) w filledcurves above fillcolor rgb '#FFFFFF' notitle lt rgb '#FFFFFF', \
-     '' u 4:xtic(1) w l lw 2 title 'Moyenne', \
-     '' u 2:xtic(1) w l lc rgb "white" lw 2 notitle, \
-     '' u 3:xtic(1) w l lc rgb "white" lw 2 notitle
+plot "temp/final.txt" using 2:xtic(4) with filledcurves above fillcolor rgb '#478778' title 'Distance max/min' lt rgb '#478778', \
+     '' u 4:xtic(1) w filledcurves above fillcolor rgb '#478778' notitle lt rgb '#478778', \
+     '' u 3:xtic(1) w l lw 2 lc rgb '#023020' title 'Moyenne', \
+     '' u 4:xtic(1) w l lc rgb "white" lw 2 notitle, \
+     '' u 2:xtic(1) w filledcurves above fillcolor rgb 'white' notitle
 
 EOF
 }
@@ -30,8 +30,11 @@ traitementS() {
         echo "Le fichier '$fichier_entree' n'existe pas."
         exit 1
     fi
-    cat "$fichier_entree" | tail -n +2 | cut -d ';' -f 1,5 > "$dossier_temp/donnees_s.txt"
     
+    cat "$fichier_entree" | tail -n +2 | cut -d ';' -f 1,5 > "$dossier_temp/donnees_s.txt"
+    trajet_count=$(awk -F';' '!seen[$1]++ {count++} END {print count}' "$dossier_temp/donnees_s.txt")
+    echo "$trajet_count" > "$dossier_temp/nombre_trajets.txt"
+
     make -C "$dossier_fichiers_c" > makeFileLogs.txt
     "$dossier_fichiers_c/S_CALCUL"
     "$dossier_fichiers_c/S_AVL"
@@ -45,5 +48,4 @@ traitementS() {
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
 }
-
 
