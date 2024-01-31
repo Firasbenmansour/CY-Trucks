@@ -70,24 +70,31 @@ if [ "$1" = "-h" ]; then
     echo "  -l      Exécuter le traitement L"
     echo "  -t      Exécuter le traitement T"
     echo "  -s      Exécuter le traitement S"
+    echo "-----------------------------------------------------------"
     exit 0
 
 elif [ "$1" = "-d1" ]; then
     traitementD1
+    echo "-----------------------------------------------------------"
     exit 0
 elif [ "$1" = "-d2" ]; then
-    traitementD2 
+    traitementD2
+    echo "-----------------------------------------------------------"
     exit 0
 elif [ "$1" = "-l" ]; then
     traitementL 
+    echo "-----------------------------------------------------------"
     exit 0
 elif [ "$1" = "-t" ]; then
     traitementT 
+    echo "-----------------------------------------------------------"
     exit 0
 elif [ "$1" = "-s" ]; then
     traitementS 
+    echo "-----------------------------------------------------------"
     exit 0
 else
     echo "Option non valide. Tapez -h pour obtenir de l'aide."
+    echo "-----------------------------------------------------------"
     exit 1
 fi
