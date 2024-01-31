@@ -3,6 +3,71 @@
 #include <string.h>
 #include "stats.h"
 
+int hash(int id_trajet, int max_trajets) {
+    return id_trajet % max_trajets;
+}
+
+void updateTrajetInfo(TrajetInfo *info, double distance) {
+    if (distance < info->min_distance || info->nombre_etapes == 0) {
+        info->min_distance = distance;
+    }
+    if (distance > info->max_distance) {
+        info->max_distance = distance;
+    }
+    info->moyenne_distance += distance;
+    info->nombre_etapes++;  
+}
+
+int lireNombreMaxTrajets() {
+    FILE *nombreTrajetsFile = fopen("temp/nombre_trajets.txt", "r");
+    if (nombreTrajetsFile == NULL) {
+        perror("Erreur lors de l'ouverture du fichier de nombre de trajets");
+        exit(EXIT_FAILURE);
+    }
+
+    int max_trajets;
+    if (fscanf(nombreTrajetsFile, "%d", &max_trajets) != 1) {
+        perror("Erreur lors de la lecture du nombre de trajets");
+        exit(EXIT_FAILURE);
+    }
+
+    fclose(nombreTrajetsFile);
+    return max_trajets;
+}
+void lireEtTraiterDonnees(FILE *inputFile, Trajet **trajets, int max_trajets) {
+    char buffer[MAX_BUFFER_SIZE];
+
+    while (fgets(buffer, sizeof(buffer), inputFile) != NULL) {
+        int id_trajet;
+        double distance;
+        sscanf(buffer, "%d;%lf", &id_trajet, &distance);
+
+        int index = hash(id_trajet, max_trajets);
+
+        if (trajets[index] == NULL) {
+            trajets[index] = malloc(sizeof(Trajet));
+            trajets[index]->id_trajet = id_trajet;
+            memset(&trajets[index]->info, 0, sizeof(TrajetInfo));
+        }
+
+        updateTrajetInfo(&trajets[index]->info, distance);
+    }
+}
+
+void ecrireResultats(FILE *outputFile, Trajet **trajets, int max_trajets) {
+    for (int i = 0; i < max_trajets; i++) {
+        if (trajets[i] != NULL) {
+            TrajetInfo *info = &trajets[i]->info;
+            if (info->nombre_etapes > 0) {
+                info->moyenne_distance /= info->nombre_etapes;
+                double difference_max_min = info->max_distance - info->min_distance;
+                fprintf(outputFile, "%d;%.2f;%.2f;%.2f;%.2f\n", trajets[i]->id_trajet,
+                        info->min_distance, info->moyenne_distance, info->max_distance, difference_max_min);
+            }
+            free(trajets[i]);
+        }
+    }
+}
 
 int max1(int a, int b) {
     return (a > b) ? a : b;
