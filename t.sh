@@ -64,7 +64,7 @@ traitementT() {
 
 
   
-    #cat "$dossier_temp/donnees_traitement_t.txt" | head -n 10
+    
     # Compilation des programmes C avec make
     make -C "$dossier_fichiers_c" > makeFileLogs.txt
 
