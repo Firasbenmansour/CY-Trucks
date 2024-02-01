@@ -42,6 +42,20 @@ if [ ! -d "$dossier_images" ]; then
     mkdir "$dossier_images"
 fi
 
+# Vérifier la présence de l'exécutable C (gcc)
+if ! command -v gcc &> /dev/null; then
+    echo "Le compilateur C (gcc) n'est pas installé."
+    echo "Installation en cours..."
+    sudo apt-get update
+    sudo apt-get install -y gcc
+
+    # Vérifier à nouveau la présence de gcc après l'installation
+    if ! command -v gcc &> /dev/null; then
+        echo "Erreur : l'installation du compilateur C a échoué."
+        exit 1
+    fi
+    echo "Installation réussie."
+fi
 
 source d1.sh
 source l.sh
