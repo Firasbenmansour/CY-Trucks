@@ -8,21 +8,35 @@ set title 'Les 10 trajets les plus longs' font '0,15'
 set xlabel "Identifiants Trajets" font '0,12'
 set ylabel "Distance (km)" font '0,12'
 set datafile separator ";"
+set grid x
 set style data histograms
 set style fill solid noborder
-set boxwidth 1.5 relative
+set boxwidth 2.5 relative
 set xtic rotate by 0 font '0,11'
 set output 'images/histogramme_l.png'
 plot 'temp/donnees_traitement_l.txt' using 2:xtic(1) lc rgb "red" notitle
 EOF
 }
 
+afficher_animation(){
+    local chars="/-\|"
+    while true; do
+        for ((i = 0; i < ${#chars}; i++)); do
+            sleep 0.1
+            echo -e "\rTraitement en cours... ${chars:$i:1} \c" 
+        done
+    done
+}
 
 traitementL() {
     fichier_entree="data/data.csv"
     
     # Mesure du temps d'exécution
     temps_debut=$(date +%s.%N)
+    
+    # Animation
+    afficher_animation &
+    PID_ANIMATION=$!
     
     # Vérification de l'existence du fichier CSV
     if [ ! -f "$fichier_entree" ]; then
@@ -32,7 +46,6 @@ traitementL() {
     
     # Vérification si le fichier de cache existe
     fichier_cache="temp/donnees_traitement_l.txt"
-    
             LC_NUMERIC="C" awk -F';' '
             NR>1{
                  sum[$1]+=$5
@@ -42,13 +55,17 @@ traitementL() {
                     printf "%.3f %s\n", sum[route], route;
                 }
             }' "$fichier_entree" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | sort -k2 -nr | awk '{printf "%s;%s\n", $2, $1}' > "$fichier_cache"
+    
+    # stopper l'animation
+    kill $PID_ANIMATION
+    wait $PID_ANIMATION 2>/dev/null
+    echo -e "\rTraitement terminé.      "
             
-    cat "$fichier_cache"
-    generer_histogramme_l
-            
+    cat "$fichier_cache"    
+    # Génération de l'histogramme
+    generer_histogramme_l            
     #Calcul du temps d'exécution
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
-
 }
