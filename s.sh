@@ -1,4 +1,5 @@
 #!/bin/bash
+
 generer_histogramme_s() {
 gnuplot <<EOF
 set term pngcairo size 1280,720 enhanced font 'arial,10'
@@ -17,6 +18,17 @@ plot "temp/final.txt" using 2:xtic(4) with filledcurves above fillcolor rgb '#47
 
 EOF
 }
+
+afficher_animation(){
+    local chars="/-\|"
+    while true; do
+        for ((i = 0; i < ${#chars}; i++)); do
+            sleep 0.1
+            echo -e "\rTraitement en cours... ${chars:$i:1} \c" 
+        done
+    done
+}
+
 traitementS() {
     fichier_entree="data/data.csv"
     dossier_temp="temp"
@@ -24,28 +36,53 @@ traitementS() {
 
     # Mesure du temps d'exécution - début
     temps_debut=$(date +%s.%N)
-
+    
+    # Animation 
+    afficher_animation &
+    PID_ANIMATION=$!
+    
     # Vérification de l'existence du fichier CSV
     if [ ! -f "$fichier_entree" ]; then
         echo "Le fichier '$fichier_entree' n'existe pas."
         exit 1
     fi
     
-    cat "$fichier_entree" | tail -n +2 | cut -d ';' -f 1,5 > "$dossier_temp/donnees_s.txt"
+    
+    # Extraction des données nécessaires du fichier CSV dans un fichier temporaire
+    cat "$fichier_entree" | tail -n +2 | cut -d ';' -f 1,5 > "$dossier_temp/donnees_s.txt" 
+    
+    # Calcul du nombre de trajets distincts et sauvegarde dans un fichier temporaire
     trajet_count=$(awk -F';' '!seen[$1]++ {count++} END {print count}' "$dossier_temp/donnees_s.txt")
     echo "$trajet_count" > "$dossier_temp/nombre_trajets.txt"
-
-    make -C "$dossier_fichiers_c" > makeFileLogs.txt
-    "$dossier_fichiers_c/S_CALCUL"
-    "$dossier_fichiers_c/S_AVL"
     
-     
+    # Compilation des programmes C avec make
+    make -C "$dossier_fichiers_c" > "$dossier_temp/makeFileLogs.txt" 2>&1
+    # Vérification du statut de sortie de make
+    if [ $? -ne 0 ]; then
+    echo "Erreur lors de la compilation avec make. Veuillez vérifier le Makefile."
+    
+    # Affichage des logs du Makefile en cas d'erreur
+    cat "$dossier_temp/makeFileLogs.txt"
+    exit 1
+    fi
+    
+    "$dossier_fichiers_c/S_CALCUL" #calcul des statiatiques
+    "$dossier_fichiers_c/S_AVL"  #trie AVL
+    
+    # Extraction des 50 premières lignes du fichier résultat AVL
     head -n 50 "$dossier_temp/resultat_avl.txt" > "$dossier_temp/final.txt"
-    generer_histogramme_s
+    
+    
+    # stopper l'animation
+    kill $PID_ANIMATION
+    wait $PID_ANIMATION 2>/dev/null
+    echo -e "\rTraitement terminé.      "
+    
     cat "$dossier_temp/final.txt"
+    #générer l'histogramme
+    generer_histogramme_s
     # Calcul du temps d'exécution
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
 }
-
