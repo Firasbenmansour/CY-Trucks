@@ -8,8 +8,8 @@ set term pngcairo size 600,800 enhanced font 'arial,10'
 set grid y
 set datafile separator ";"
 set style fill solid noborder
-set boxwidth 1.5 relative
-set locale 'fr_FR.UTF-8'  # Set the locale to one that uses a comma as a decimal separator
+set boxwidth 2.5 relative
+set locale 'fr_FR.UTF-8' 
 set format y "%.f" 
 set xlabel "Conducteurs" rotate by 180 font '0,12' offset 0,-9 
 set y2label "Distance (km)" font '0,12' offset 3,0
@@ -23,20 +23,31 @@ EOF
 convert images/histogramme_d2.png -rotate 90 images/histogramme_d2.png
 }
 
+afficher_animation(){
+    local chars="/-\|"
+    while true; do
+        for ((i = 0; i < ${#chars}; i++)); do
+            sleep 0.1
+            echo -e "\rTraitement en cours... ${chars:$i:1} \c" 
+        done
+    done
+}
 
 traitementD2() {
-    # Récupération du nom du fichier CSV
     fichier_entree="data/data.csv"
     
     # Mesure du temps d'exécution
     temps_debut=$(date +%s.%N)
+    
+    # Animation
+    afficher_animation &
+    PID_ANIMATION=$!
     
     # Vérification de l'existence du fichier CSV
     if [ ! -f "$fichier_entree" ]; then
         echo "Le fichier '$fichier_entree' n'existe pas."
         exit 1
     fi
-
     
     fichier_cache="temp/donnees_traitement_d2.txt"
     
@@ -51,15 +62,17 @@ traitementD2() {
             }
         }' "$fichier_entree" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | awk '{print $2, $3";", $1}'> "$fichier_cache"
     
+    # stopper l'animation
+    kill $PID_ANIMATION
+    wait $PID_ANIMATION 2>/dev/null
+    echo -e "\rTraitement terminé.      "
 
     # Si le fichier existe, affichage de son contenu
-    cat "$fichier_cache"
-
+    cat "$fichier_cache"  
+    # Génération de l'histogramme
+    generer_histogramme_d2   
     # Calcul du temps d'exécution
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
     echo "Temps d'exécution : $temps_execution secondes"
-
-    generer_histogramme_d2
-
 }
