@@ -17,18 +17,30 @@ set ytic font '0,12'
 set xtics rotate by -30
 set boxwidth 1.5
 set output 'images/histogramme_t.png'
-plot 'temp/villes_triees_ordreAlpha.txt' using 2:xtic(1) title 'Total de trajet' lc rgb "spring-green", \
-     "" using 3:x2tic(1) title 'Ville de départ' lc rgb "dark-green"
+plot 'temp/villes_triees_ordreAlpha.txt' using 2:xtic(1) title 'Total de trajet' lc rgb '#478778', \
+     "" using 3:x2tic(1) title 'Ville de départ' lc rgb '#023020'
 EOF
 }
 
+afficher_animation(){
+    local chars="/-\|"
+    while true; do
+        for ((i = 0; i < ${#chars}; i++)); do
+            sleep 0.1
+            echo -e "\rTraitement en cours... ${chars:$i:1} \c" 
+        done
+    done
+}
 
 traitementT() {
     fichier_entree="data/data.csv"
     dossier_temp="temp"  
     dossier_fichiers_c="progc"
 
-
+    # Animation 
+    afficher_animation &
+    PID_ANIMATION=$!
+    
     # Mesure du temps d'exécution - début
     temps_debut=$(date +%s.%N)
 
@@ -41,7 +53,7 @@ traitementT() {
     # Utilisation d'awk pour traiter les données
     awk -F';' '
     NR>1 {
-        if ($2 == 1) { si on est dans l etape 1 du trajet
+        if ($2 == 1) { 
             depart_trajet[$3]++;  # compteur de nombre de fois une ville a été un point de départ
         }
         if (!compte_trajet[$1, $3]) {   # Si la combinaison unique d identifiant de trajet et ville de départ n a pas été rencontrée
@@ -62,12 +74,18 @@ traitementT() {
     }' "$fichier_entree" > "$dossier_temp/donnees_traitement_t.txt"
 
 
-
-  
-    
     # Compilation des programmes C avec make
-    make -C "$dossier_fichiers_c" > makeFileLogs.txt
-
+    make -C "$dossier_fichiers_c" > "$dossier_temp/makeFileLogs.txt" 2>&1
+    # Vérification du statut de sortie de make
+    if [ $? -ne 0 ]; then
+    echo "Erreur lors de la compilation avec make. Veuillez vérifier le Makefile."
+    
+    # Affichage des logs du Makefile en cas d'erreur
+    cat "$dossier_temp/makeFileLogs.txt"
+    exit 1
+    fi
+    
+    
     # Exécution des programmes C et redirection des résultats vers les fichiers temporaires
     "$dossier_fichiers_c/t_AVL_nbTrajets" > "$dossier_temp/villes_triees_nbTrajets.txt"
     
@@ -75,11 +93,16 @@ traitementT() {
 
     "$dossier_fichiers_c/t_AVL_ordreAlpha" > "$dossier_temp/villes_triees_ordreAlpha.txt"
     
-    cat "$dossier_temp/villes_triees_ordreAlpha.txt"
-    generer_histogramme_t
-
+    # stopper l'animation
+    kill $PID_ANIMATION
+    wait $PID_ANIMATION 2>/dev/null
+    echo -e "\rTraitement terminé.      "
+    
+    cat "$dossier_temp/villes_triees_ordreAlpha.txt"   
+    # Génération de l'histogramme
+    generer_histogramme_t   
+    # Calcul du temps d'exécution
     temps_fin=$(date +%s.%N)
     temps_execution=$(echo "$temps_fin - $temps_debut" | bc)
-    echo "Temps d'exécution : $temps_execution secondes"
-    
+    echo "Temps d'exécution : $temps_execution secondes" 
 }    
