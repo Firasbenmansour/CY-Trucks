@@ -1,20 +1,19 @@
-#!/bin/bash
-
 generer_histogramme_l() {
 gnuplot <<EOF
 reset
 set term pngcairo size 800,600 enhanced font 'arial,10'
-set title 'Les 10 trajets les plus longs' font '0,15'
-set xlabel "Identifiants Trajets" font '0,12'
-set ylabel "Distance (km)" font '0,12'
+set title 'Les 10 trajets les plus longs' font 'Times-New-Roman,20,20'
+set xlabel "Identifiants Trajets" font 'arial,12'
+set ylabel "Distance (km)" font 'arial,12'
 set datafile separator ";"
-set grid x
 set style data histograms
 set style fill solid noborder
 set boxwidth 2.5 relative
-set xtic rotate by 0 font '0,11'
+set xtic rotate by 0 font 'arial,11'
+set yrange [0:*]
+set grid y
 set output 'images/histogramme_l.png'
-plot 'temp/donnees_traitement_l.txt' using 2:xtic(1) lc rgb "red" notitle
+plot 'temp/donnees_traitement_l.txt' using 2:xtic(1) lc rgb '#478778' notitle
 EOF
 }
 
@@ -26,6 +25,12 @@ afficher_animation(){
             echo -e "\rTraitement en cours... ${chars:$i:1} \c" 
         done
     done
+}
+
+stop_animation() {
+    # Stopper l'animation
+    kill $PID_ANIMATION
+    wait $PID_ANIMATION 2>/dev/null
 }
 
 traitementL() {
@@ -40,6 +45,8 @@ traitementL() {
     
     # Vérification de l'existence du fichier CSV
     if [ ! -f "$fichier_entree" ]; then
+        stop_animation
+        echo -e "\rTraitement échoué!      "
         echo "Le fichier '$fichier_entree' n'existe pas."
         exit 1
     fi
@@ -57,8 +64,7 @@ traitementL() {
             }' "$fichier_entree" | LC_NUMERIC="C" sort -k1 -nr | head -n 10 | sort -k2 -nr | awk '{printf "%s;%s\n", $2, $1}' > "$fichier_cache"
     
     # stopper l'animation
-    kill $PID_ANIMATION
-    wait $PID_ANIMATION 2>/dev/null
+    stop_animation
     echo -e "\rTraitement terminé.      "
             
     cat "$fichier_cache"    
