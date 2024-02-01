@@ -9,7 +9,7 @@ typedef struct Distance {
     double moy;
     double max;
     double valeur;
-    struct Distancea *gauche;
+    struct Distance *gauche;
     struct Distance *droite;
     int hauteur;
 } Distance;
