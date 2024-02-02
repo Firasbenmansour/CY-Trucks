@@ -1,8 +1,8 @@
 # **Cy-trucks**
----
-Bienvenue dans le monde de Cy-trucks, votre outil avancé de gestion logistique pour les sociétés nationales de transport routier. Cet outil a été spécialement conçu pour simplifier l'analyse et la consolidation de données massives issues de fichiers CSV dans le domaine du transport routier.
-Cy-trucks émerge comme une solution essentielle pour les gestionnaires de sociétés de transport qui cherchent à tirer des insights significatifs de leurs activités, tout en évitant la complexité inhérente aux données volumineuses et hétérogènes.
 
+Bienvenue dans le monde de Cy-trucks, votre outil avancé de gestion logistique pour les sociétés nationales de transport routier. Cet outil a été spécialement conçu pour simplifier l'analyse et la consolidation de données massives issues de fichiers CSV dans le domaine du transport routier.<br />
+Cy-trucks émerge comme une solution essentielle pour les gestionnaires de sociétés de transport qui cherchent à tirer des insights significatifs de leurs activités, tout en évitant la complexité inhérente aux données volumineuses et hétérogènes.
+---
 ### ***Traitements Disponibles***
 ---
 - TRAITEMENT [D1] : conducteurs avec le plus de trajets.
@@ -40,8 +40,8 @@ Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce pro
 #### ***Installation des Dépendances***
 
 Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes : <br />
-`sudo apt-get update <br />
-sudo apt-get install gcc gnuplot imagemagick make <br />`
+`sudo apt-get update` <br />
+`sudo apt-get install gcc gnuplot imagemagick make` <br />
 
 ### ***Fichiers nécessaires***
 ---
@@ -53,15 +53,15 @@ sudo apt-get install gcc gnuplot imagemagick make <br />`
 - `t.sh` <br />
 - `s.sh` <br />
 #### *Dans le dosssier progc :* <br />
-- s_avl.c <br />
-- s_calcul.c <br />
-- stats.c <br />
-- stats.h <br />
-- t_avl_nbTrajets.c <br />
-- t_avl_ordreAlpha.c <br />
-- ville.c <br />
-- ville.h <br />
-- Makefile <br />
+- `s_avl.c` <br />
+- `s_calcul.c` <br />
+- `stats.c` <br />
+- `stats.h` <br />
+- `t_avl_nbTrajets.c` <br />
+- `t_avl_ordreAlpha.c` <br />
+- `ville.c` <br />
+- `ville.h` <br />
+- `Makefile` <br />
 ---
 ### ***Fichiers nécessaires***
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
