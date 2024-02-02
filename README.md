@@ -40,14 +40,8 @@ Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce pro
 #### ***Installation des Dépendances***
 
 Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes (exemple pour Ubuntu) : <br />
-<html>
-<body>
-<p>bash
-sudo apt-get update
-sudo apt-get install gcc gnuplot imagemagick make</p>
-</body>
-</html>
-
+sudo apt-get update <br />
+sudo apt-get install gcc gnuplot imagemagick make <br />
 
 ### ***Fichiers nécessaires***
 ---
