@@ -64,4 +64,5 @@ $~~~~~~~~~~~$`-t   :  Exécuter le traitement T` <br />
 - `ville.h` <br />
 - `Makefile` <br />
 ---
-***Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.***
+***Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.*** <br />
+Travail élaboré par le trinôme-MI5-I : BENMANSOUR Firas / TAWFIK Mouhamadimame / SOFACK KENFACK Berlyse Dafna
