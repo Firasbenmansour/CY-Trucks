@@ -17,7 +17,7 @@ Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce pro
 
 - **gcc (GNU Compiler Collection)** : Utilisé pour la compilation du code source. <br />
 
-- **gnuplot** : Utilisé pour la génération de graphiques et de parcelles de données. <br />
+- **gnuplot** : Utilisé pour la génération des histogrammes. <br />
 
 - **convert (ImageMagick)** : Utilisé pour la manipulation d'images. <br />
 
