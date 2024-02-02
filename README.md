@@ -39,19 +39,19 @@ Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce pro
 
 #### ***Installation des Dépendances***
 
-Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes (exemple pour Ubuntu) : <br />
-sudo apt-get update <br />
-sudo apt-get install gcc gnuplot imagemagick make <br />
+Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes : <br />
+`sudo apt-get update <br />
+sudo apt-get install gcc gnuplot imagemagick make <br />`
 
 ### ***Fichiers nécessaires***
 ---
 #### *Dans le répertoire courant :* <br />
-- main.sh <br />
-- d1.sh <br />
-- d2.sh <br />
-- l.sh <br />
-- t.sh <br />
-- s.sh <br />
+- `main.sh` <br />
+- `d1.sh` <br />
+- `d2.sh` <br />
+- `l.sh` <br />
+- `t.sh` <br />
+- `s.sh` <br />
 #### *Dans le dosssier progc :* <br />
 - s_avl.c <br />
 - s_calcul.c <br />
