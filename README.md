@@ -25,6 +25,25 @@ $~~~~~~~~~~~$-d2  :  Exécuter le traitement D2 <br />
 $~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
 $~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
 $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
+### ***Dépendances***
+---
+Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce projet : <br />
+
+- **gcc (GNU Compiler Collection)** : Utilisé pour la compilation du code source. <br />
+
+- **gnuplot** : Utilisé pour la génération de graphiques et de parcelles de données. <br />
+
+- **convert (ImageMagick)** : Utilisé pour la manipulation d'images. <br />
+
+- **make** : Utilisé pour la gestion de la construction du logiciel. <br />
+
+#### ***Installation des Dépendances***
+
+Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes (exemple pour Ubuntu) : <br />
+
+>bash
+>sudo apt-get update
+>sudo apt-get install gcc gnuplot imagemagick make
 
 ### ***Fichiers nécessaires***
 ---
@@ -46,4 +65,5 @@ $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 - ville.h <br />
 - Makefile <br />
 ---
+### ***Fichiers nécessaires***
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
