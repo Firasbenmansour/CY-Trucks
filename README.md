@@ -29,21 +29,21 @@ $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 ### ***Fichiers nécessaires***
 ---
 #### Dans le répertoire courant : <br />
->- main.sh <br />
->- d1.sh <br />
->- d2.sh <br />
->- l.sh <br />
->- t.sh <br />
->- s.sh <br />
+- main.sh <br />
+- d1.sh <br />
+- d2.sh <br />
+- l.sh <br />
+- t.sh <br />
+- s.sh <br />
 #### Dams le dosssier progc : <br />
->>- s_avl.c <br />
->>- s_calcul.c <br />
->>- stats.c <br />
->>- stats.h <br />
->>- t_avl_nbTrajets.c <br />
->>- t_avl_ordreAlpha.c <br />
->>- ville.c <br />
->>- ville.h <br />
->>- Makefile <br />
+- s_avl.c <br />
+- s_calcul.c <br />
+- stats.c <br />
+- stats.h <br />
+- t_avl_nbTrajets.c <br />
+- t_avl_ordreAlpha.c <br />
+- ville.c <br />
+- ville.h <br />
+- Makefile <br />
 ---
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
