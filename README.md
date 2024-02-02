@@ -32,10 +32,11 @@ Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les in
 ### ***Utilisation***
 ---
 1. Enregistrez les fichiers dans un espace personnel.
-2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
+2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé `data.csv`.
 3. Ouvrez le Terminal.
-4. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
-5. Tapez ./main.sh -option <br />
+4. Tapez `cd`, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
+5. Tapez `chmod +x main.sh` pour modifier les droits d'exécution du fichier main.sh.
+6. Enfin, tapez `./main.sh -option` pour lancer le programme, en remplaçant "<option>" par l'option spécifique que vous souhaitez utiliser. <br />
 - les option disponibles : <br /> 
 $~~~~~~~~~~~$`-h   :  aide` <br />
 $~~~~~~~~~~~$`-d1  :  Exécuter le traitement D1` <br />
