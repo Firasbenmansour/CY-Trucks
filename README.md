@@ -26,7 +26,7 @@ $~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
 $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 
 ### Fichiers nécessaires
-
+##### Dans le répertoire courant : <br />
 - main.sh <br />
 - d1.sh <br />
 - d2.sh <br />
