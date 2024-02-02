@@ -10,7 +10,7 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 - TRAITEMENT [T]  : les 10 villes les plus traversées.
 - TRAITEMENT [S]  : statistiques sur les étapes.
 
-#### UTULISATION
+### UTULISATION
 
 1. Enregistrez les fichiers dans un espace personnel.
 2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
@@ -25,7 +25,7 @@ $~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
 $~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
 $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 
-#### Fichiers nécessaires
+### Fichiers nécessaires
 
 - main.sh <br />
 - d1.sh <br />
