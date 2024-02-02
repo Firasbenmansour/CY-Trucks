@@ -33,7 +33,7 @@ $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 - l.sh <br />
 - t.sh <br />
 - s.sh <br />
-#### Dams le dosssier progc : <br />
+==> Dams le dosssier progc : <br />
 - s_avl.c <br />
 - s_calcul.c <br />
 - stats.c <br />
