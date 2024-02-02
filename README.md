@@ -4,7 +4,7 @@ Bienvenue dans le monde de Cy-trucks, votre outil avancé de gestion logistique 
 Cy-trucks émerge comme une solution essentielle pour les gestionnaires de sociétés de transport qui cherchent à tirer des insights significatifs de leurs activités, tout en évitant la complexité inhérente aux données volumineuses et hétérogènes.
 
 ### ***Traitements Disponibles***
---
+-
 - TRAITEMENT [D1] : conducteurs avec le plus de trajets.
 - TRAITEMENT [D2] : conducteurs et la plus grande distance.
 - TRAITEMENT [L]  : les 10 trajets les plus longs.
@@ -12,7 +12,7 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 - TRAITEMENT [S]  : statistiques sur les étapes.
 
 ### ***UTULISATION***
---
+-
 1. Enregistrez les fichiers dans un espace personnel.
 2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
 3. Ouvrez le Terminal.
@@ -26,7 +26,7 @@ $~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
 $~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
 $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 ### ***Dépendances***
---
+-
 Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce projet : <br />
 
 - **gcc (GNU Compiler Collection)** : Utilisé pour la compilation du code source. <br />
@@ -44,7 +44,7 @@ Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les in
 `sudo apt-get install gcc gnuplot imagemagick make` <br />
 
 ### ***Fichiers nécessaires***
---
+-
 #### *Dans le répertoire courant :* <br />
 - `main.sh` <br />
 - `d1.sh` <br />
