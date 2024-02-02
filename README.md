@@ -17,7 +17,7 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 3. Ouvrez le Terminal.
 4. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
 5. Tapez ./main.sh -option <br />
---> les option disponibles : <br /> 
+- les option disponibles : <br /> 
 $~~~~~~~~~~~$-h   :  aide <br />
 $~~~~~~~~~~~$-d1  :  Exécuter le traitement D1 <br />
 $~~~~~~~~~~~$-d2  :  Exécuter le traitement D2 <br />
@@ -34,14 +34,14 @@ $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 - t.sh <br />
 - s.sh <br />
 - Dams le dosssier progc : <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - s_avl.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - s_calcul.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - stats.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - stats.h <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - t_avl_nbTrajets.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - t_avl_ordreAlpha.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - ville.c <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - ville.h <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~$ - Makefile <br />
+$~~$ - s_avl.c <br />
+$~~$ - s_calcul.c <br />
+$~~$ - stats.c <br />
+$~~$ - stats.h <br />
+$~~$ - t_avl_nbTrajets.c <br />
+$~~$ - t_avl_ordreAlpha.c <br />
+$~~$ - ville.c <br />
+$~~$ - ville.h <br />
+$~~$ - Makefile <br />
 
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
