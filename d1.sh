@@ -58,7 +58,10 @@ traitementD1() {
     # Extraction des noms de conducteurs et comptage des trajets uniques
     awk -F';' '
         NR>1{
-            conducteurs[$6" "$2]++
+            if ($2 == 1) {
+            conducteurs[$6" "$2]++; 
+        }
+            
         } 
         END {
             for (cond in conducteurs)
