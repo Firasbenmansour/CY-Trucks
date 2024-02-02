@@ -10,21 +10,7 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 - TRAITEMENT [L]  : les 10 trajets les plus longs.
 - TRAITEMENT [T]  : les 10 villes les plus traversées.
 - TRAITEMENT [S]  : statistiques sur les étapes.
-
-### ***UTULISATION***
----
-1. Enregistrez les fichiers dans un espace personnel.
-2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
-3. Ouvrez le Terminal.
-4. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
-5. Tapez ./main.sh -option <br />
-- les option disponibles : <br /> 
-$~~~~~~~~~~~$-h   :  aide <br />
-$~~~~~~~~~~~$-d1  :  Exécuter le traitement D1 <br />
-$~~~~~~~~~~~$-d2  :  Exécuter le traitement D2 <br />
-$~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
-$~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
-$~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
+  
 ### ***Dépendances***
 ---
 Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce projet : <br />
@@ -40,8 +26,24 @@ Assurez-vous d'avoir les éléments suivants installés avant d'exécuter ce pro
 #### ***Installation des Dépendances***
 
 Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les installer en utilisant les commandes suivantes : <br />
+<br />
 `sudo apt-get update` <br />
 `sudo apt-get install gcc gnuplot imagemagick make` <br />
+
+### ***Utilisation***
+---
+1. Enregistrez les fichiers dans un espace personnel.
+2. Ajoutez le fichier de données que vous souhaitez analyser dans le dossier. Assurez-vous que le fichier de données soit au format CSV et nommé "data.csv".
+3. Ouvrez le Terminal.
+4. Tapez cd, suivi d'un espace et de l'emplacement où les fichiers du programme sont enregistrés.
+5. Tapez ./main.sh -option <br />
+- les option disponibles : <br /> 
+$~~~~~~~~~~~$-h   :  aide <br />
+$~~~~~~~~~~~$-d1  :  Exécuter le traitement D1 <br />
+$~~~~~~~~~~~$-d2  :  Exécuter le traitement D2 <br />
+$~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
+$~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
+$~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 
 ### ***Fichiers nécessaires***
 ---
