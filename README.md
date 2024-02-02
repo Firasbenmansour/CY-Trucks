@@ -40,8 +40,8 @@ Si vous ne disposez pas déjà des dépendances nécessaires, vous pouvez les in
 - les option disponibles : <br /> 
 $~~~~~~~~~~~$`-h   :  aide` <br />
 $~~~~~~~~~~~$`-d1  :  Exécuter le traitement D1` <br />
-$~~~~~~~~~~~$`-d2  :  Exécuter le traitement D2 <br />
-$~~~~~~~~~~~$-l   :  Exécuter le traitement L` <br />
+$~~~~~~~~~~~$`-d2  :  Exécuter le traitement D2` <br />
+$~~~~~~~~~~~$`-l   :  Exécuter le traitement L` <br />
 $~~~~~~~~~~~$`-s   :  Exécuter le traitement S` <br />
 $~~~~~~~~~~~$`-t   :  Exécuter le traitement T` <br />
 
