@@ -19,10 +19,15 @@ Cy-trucks émerge comme une solution essentielle pour les gestionnaires de soci�
 5. Tapez ./main.sh -option <br />
 --> les option disponibles : <br /> 
 $~~~~~~~~~~~$-h   :  aide <br />
+
 $~~~~~~~~~~~$-d1  :  Exécuter le traitement D1 <br />
+
 $~~~~~~~~~~~$-d2  :  Exécuter le traitement D2 <br />
+
 $~~~~~~~~~~~$-l   :  Exécuter le traitement L <br />
+
 $~~~~~~~~~~~$-s   :  Exécuter le traitement S <br />
+
 $~~~~~~~~~~~$-t   :  Exécuter le traitement T <br />
 
 Explorez et profitez pleinement des fonctionnalités de Cy-trucks pour simplifier la gestion logistique de votre entreprise.
